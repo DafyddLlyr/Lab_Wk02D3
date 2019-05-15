@@ -3,7 +3,6 @@ require("minitest/rg")
 require_relative("../pub")
 require_relative("../drink")
 require_relative("../customer")
-require("pry")
 
 class PubTest < MiniTest::Test
 
@@ -18,7 +17,7 @@ class PubTest < MiniTest::Test
   end
 
   def test_name
-    assert_equal("CodeClan Bar", @pub.name)
+    assert_equal("CodeClan Bar", @pub.name)ru
   end
 
   def test_till
@@ -50,9 +49,14 @@ class PubTest < MiniTest::Test
     assert_equal(false, @pub.check_limit(@customer_1))
   end
 
-  def test_reduce_stock
+  def test_reduce_stock__has_stock
     @pub.reduce_stock(@drink_1)
     assert_equal(9, @pub.stock[@drink_1])
+  end
+
+  def test_reduce_stock__no_stock
+    5.times { @pub.reduce_stock(@drink_3) }
+    assert_equal(0, @pub.stock[@drink_3])
   end
 
   def test_stock_value

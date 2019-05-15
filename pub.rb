@@ -1,7 +1,6 @@
 class Pub
 
-  attr_reader :name, :till
-  attr_accessor :stock
+  attr_reader :name, :till, :stock
 
   def initialize(name, till, stock)
     @name = name
@@ -23,7 +22,7 @@ class Pub
   end
 
   def reduce_stock(drink)
-    @stock[drink] -= 1
+    @stock[drink] -= 1 if @stock[drink] > 0
   end
 
   def stock_value
