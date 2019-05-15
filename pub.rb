@@ -1,11 +1,12 @@
 class Pub
 
-  attr_reader :name, :drinks, :till
+  attr_reader :name, :till
+  attr_accessor :stock
 
-  def initialize(name, till, drinks)
+  def initialize(name, till, stock)
     @name = name
     @till = till
-    @drinks = drinks
+    @stock = stock
     @alcohol_limit = 10
   end
 
@@ -19,6 +20,18 @@ class Pub
 
   def check_limit(customer)
     return customer.drunkenness < @alcohol_limit
+  end
+
+  def reduce_stock(drink)
+    @stock[drink] -= 1
+  end
+
+  def stock_value
+    total = 0
+    for drink in @stock.keys
+      total += drink.price * @stock[drink]
+    end
+    return total
   end
 
 end

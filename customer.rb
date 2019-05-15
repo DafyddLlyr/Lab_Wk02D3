@@ -11,10 +11,11 @@ class Customer
   end
 
   def buy_drink(drink, pub)
-    if pub.check_age(self) && pub.check_limit(self)
+    if pub.check_age(self) && pub.check_limit(self) && pub.stock[drink] > 0
       @wallet -= drink.price
       pub.increase_money(drink)
       @drunkenness += drink.alcohol_level
+      pub.reduce_stock(drink)
     end
   end
 
