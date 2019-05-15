@@ -52,6 +52,13 @@ class CustomerTest < MiniTest::Test
     assert_equal(0, @pub.stock[@drink_1])
   end
 
+  def test_buy_drink__no_money
+    poor_customer = Customer.new("Bob", 0, 20)
+    poor_customer.buy_drink(@drink_1, @pub)
+    assert_equal(4, @pub.stock[@drink_3])
+    assert_equal(0, poor_customer.wallet)
+  end
+
   def test_drunkenness__under_limit
     @customer_1.buy_drink(@drink_3, @pub)
     assert_equal(5, @customer_1.drunkenness)
